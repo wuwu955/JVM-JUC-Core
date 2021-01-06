@@ -482,18 +482,28 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 
 ## pidstat
 
-查看某个进程的运行信息。
+查看某个进程的运行信息。 
+```
+所有cpu核的信息
+pidstat  -p -ALl 2
+每个进程的
+pidstat -u 1 -p pid
+查看进程消耗的内存
+pidstat  -p pid -r 2 （采样间隔秒数）
+磁盘io
+pidstat -d 2 -p pid
+``` 
 
 ## free
 
-查看内存信息。
+查看内存信息。应用程序可用内存/系统物理内存 > 70% 内存充足 应用程序可用内存/系统物理内存 < 20% 内存不足
 
 ## df
 
-查看磁盘信息。
+查看磁盘信息。df -h
 
-## iostat
-
+## iostat 磁盘io
+iostat -xdk 2 3
 查看磁盘I/O信息。比如有时候MySQL在查表的时候，会占用大量磁盘I/O，体现在该指令的`%util`字段很大。对于死循环的程序，CPU占用固然很高，但是磁盘I/O不高。
 
 ## ifstat
@@ -502,7 +512,7 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 
 # CPU占用过高原因定位
 
-先用`top`找到CPU占用最高的进程，然后用`ps -mp pid -o THREAD,tid,time`，得到该**进程**里面占用最高的**线程**。这个线程是10进制的，将其转成16进制，然后用`jstack pid | grep tid`可以定位到具体哪一行导致了占用过高。
+先用`top`找到CPU占用最高的进程，然后用`ps -mp pid -o THREAD,tid,time`，得到该**进程**里面占用最高的**线程**。这个线程是10进制的，将其转成16进制 printf "%x\n"，然后用`jstack pid | grep tid` (英文小写) -A60 前60行 可以定位到具体哪一行导致了占用过高。
 
 # JVM性能调优和监控工具
 
@@ -521,3 +531,8 @@ Java版的`ps -ef`查看所有JVM进程。
 ## jmap
 
 JVM内存映像工具。
+jmap -dump:live,format=b,file=heap.dump pid
+
+## github 操作
+fork wacth in  stars follow
+
