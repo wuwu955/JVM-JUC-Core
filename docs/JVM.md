@@ -470,7 +470,7 @@ Java 8可以将垃圾收集器分为四类。
 cpu 
 us 用户线程消耗cpu 的百分比 us 长期高于50% 需要优化
 sy 内核线程消耗cpu 的百分比
-
+us +sy 超过80% 说明cpu 不足
 ```shell
 [root@ ~]# vmstat -n 2 3
 procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
