@@ -532,7 +532,12 @@ Java版的`ps -ef`查看所有JVM进程。
 
 JVM内存映像工具。
 jmap -dump:live,format=b,file=heap.dump pid
+jmap -dump:live  pid > xx.txt |less
 
+## dump 文件分析网站
+https://heaphero.io/
+https://www.gceasy.io/
+https://account.perfma.com/
 ## github 操作
 fork wacth in  stars follow
 
